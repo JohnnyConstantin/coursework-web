@@ -27,7 +27,6 @@ input{
     display: inline-block;
     font-size: 20px;
     box-sizing: border-box;
-    transition: .5s;
 }
 
 input[type="text"]{
@@ -86,10 +85,19 @@ i{
     background-color: chocolate;
 }
 
+.type input[type="checkbox"]:checked i{
+    border-radius: 40px;
+    background-color: chocolate;
+}
+
 .search{
     position: absolute;
     top: 50%;
     left: 50%;
     width: 80%;
     transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"]{
+    visibility: visible;
 }

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>CaptainPrice</title>
 
-    <link rel="stylesheet" href="static/styles/index.css">
+    <link rel="stylesheet" href="../static/styles/index.css">
+    <script src="../static/js/index.js"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.0.10/css/all.css" crossorigin="anonymous">
 
 </head>
@@ -13,12 +14,15 @@
 <div id="name">CaptainPrice</div>
 
 <div class="type">
-    <i style='font-size:35px' class='fa fa-laptop'></i>
+    <div>
+            <input type="checkbox" name="laptop" id="laptop" checked>
+            <label for="laptop"><i style='font-size:35px' class='fa fa-laptop'></i></label>
+    </div>
 </div>
 
 <div class="search">
     <h1>Поиск</h1>
-    <form action="parser.py" method="get">
+    <form action="{{ url_for('get_laptops') }}" method="post">
         <input type="text" placeholder="Введите товар для поиска..." name="item_to_search">
         <input type="submit"  value="Сравнить">
     </form>
