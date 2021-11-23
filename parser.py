@@ -1,16 +1,5 @@
-from flask import Flask, render_template
+import cgi
 
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-  return render_template('index.html')
-
-@app.route('/compare/')
-def my_link():
-  print ('I got clicked!')
-
-  return 'Click.'
-
-if __name__ == '__parser__':
-  app.run(debug=True)
+form = cgi.FieldStorage()
+searchterm = form.getvalue('item_to_search')
+print(searchterm)

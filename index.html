@@ -18,9 +18,9 @@
 
 <div class="search">
     <h1>Поиск</h1>
-    <form action="/compare/">
-        <input type="text" placeholder="Введите товар для поиска...">
-        <input type="submit" value="Сравнить">
+    <form action="parser.py" method="get">
+        <input type="text" placeholder="Введите товар для поиска..." name="item_to_search">
+        <input type="submit"  value="Сравнить">
     </form>
 </div>
 
