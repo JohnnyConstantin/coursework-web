@@ -77,20 +77,24 @@ i{
     cursor: pointer;
     padding: 20px;
     color: azure;
+    border-radius: 40px;
+    background-color: chocolate;
+    font-size: 40px;
     transition: 1s;
 }
 
 .type i:hover{
     border-radius: 40px;
+    font-size: 40px;
+    color: #272b2f;
     background-color: chocolate;
 }
 
 .search{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 80%;
-    transform: translate(-50%, -50%);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5em;
+    width: 60%;
 }
 
 input[type="checkbox"]{

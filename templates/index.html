@@ -11,34 +11,37 @@
 </head>
 <body>
 
-<div id="name">CaptainPrice</div>
+<div id="name"><a style="text-decoration: none; color: azure" href="{{ url_for('start') }}">CaptainPrice</a></div>
 
 <div class="type">
     <div>
-            <input type="checkbox" name="laptop" id="type_laptops" checked>
-            <label for="type_laptops"><i style='font-size:35px' class='fa fa-laptop'></i></label>
+            <input type="checkbox" name="laptop" id="type_laptops">
+            <label for="type_laptops"><i class='fa fa-laptop'></i></label>
     </div>
-    <div>
+    <!--<div>
             <input type="checkbox" name="phone" id="type_phones" checked>
             <label for="type_phones"><i style='font-size:35px' class='fa fa-phone'></i></label>
-    </div>
+    </div>-->
 </div>
-
-<div class="search">
-    <h1>Поиск</h1>
-    <form action="{{ url_for('get_laptops') }}" method="post">
-        <input type="text" placeholder="Введите товар для поиска..." name="item_to_search">
-        <input type="submit"  value="Сравнить">
-    </form>
-</div>
-
 <div class="info">
-        <h1>Выберите тип продукта</h1>
+<!--        <h1>Выберите тип продукта</h1>-->
+        <h1>Искать ноутбук просто!</h1>
         <i style='font-size:15px' class='fa fa-play'></i>
         <h1>Введите название товара</h1>
         <i style='font-size:15px' class='fa fa-play'></i>
         <h1>Сравнивайте цены</h1>
 </div>
-
+<div class="search">
+    <h1 id="searching">Поиск</h1>
+    <form action="{{ url_for('get_laptops') }}" method="post">
+        <input type="text" placeholder="Введите товар для поиска..." name="item_to_search">
+        <input type="submit"  value="Сравнить" id="submit_button">
+    </form>
+</div>
 </body>
+
+{% block body %}
+{% endblock %}
+
+
 </html>
