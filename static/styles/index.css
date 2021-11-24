@@ -85,11 +85,6 @@ i{
     background-color: chocolate;
 }
 
-.type input[type="checkbox"]:checked i{
-    border-radius: 40px;
-    background-color: chocolate;
-}
-
 .search{
     position: absolute;
     top: 50%;
