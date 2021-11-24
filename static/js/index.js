@@ -1,5 +1,5 @@
 window.onload = function () {
-    
+
     document.querySelector('#type_phones').onclick = function() {
        if ( this.checked ) {
            console.log("phone checked");
