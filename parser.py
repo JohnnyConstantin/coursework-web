@@ -19,18 +19,23 @@ def parse_mobicom(item):
         r = session.get(url, params=par)
         # получаем объект  BeautifulSoup и записываем в переменную soup
         soup = BeautifulSoup(r.text, 'html.parser')
-        # с помощью циклам перебираем товары на странице и получаем из них нужные параметры
+        # с помощью цикла перебираем товары на странице и получаем из них нужные параметры
         for i in range(12):
             # получаем название товара
             product = soup.find_all(class_='prod-en-lista-name')[i].get_text()
-            if (item in product):
+            if item in product:
                 # получаем цену товара
                 price = soup.find_all(class_='buttonprice-list')[i].get_text()
+                #получаем картинку
                 image = soup.find_all(class_='jshop_img')[i]['src']
+                #получаем ссылку
+                href = soup.find_all(class_='prod-list-detail')[i]['href']
+                href = 'https://www.mobicomshop.ru' + href.replace(".html", "")
+
                 # удаляем пробел из цены
                 price = price.replace("\n", "")
                 # добавляем данные о товаре в список
-                d.append([product, price, image])
+                d.append([product, price, image, href])
     return d
 
 
@@ -45,11 +50,11 @@ def get_laptops():
 
     checked = request.form.get('laptop')
     item = request.form.get('item_to_search')
+    print(item)
 
-    if item.replace(" ", "") != "":
+    if item != "":
         d = parse_mobicom(item)
         if len(d) == 0:
-            print()
             return render_template('not_found.html')
         else:
             return render_template('result.html', datas=d)
