@@ -25,12 +25,12 @@ def parse_mobicom(item):
             product = soup.find_all(class_='prod-en-lista-name')[i].get_text()
             if (item in product):
                 # получаем цену товара
-                price = soup.find_all(class_='prod-en-lista-price')[i].get_text()
+                price = soup.find_all(class_='buttonprice-list')[i].get_text()
+                image = soup.find_all(class_='jshop_img')[i]['src']
                 # удаляем пробел из цены
-                price = price.replace(" ", "")
                 price = price.replace("\n", "")
                 # добавляем данные о товаре в список
-                d.append([product, price])
+                d.append([product, price, image])
     return d
 
 
@@ -52,8 +52,7 @@ def get_laptops():
             print()
             return render_template('not_found.html')
         else:
-            print()
-            #return  Вывести предметы
+            return render_template('result.html', datas=d)
     else:
         return render_template('no_args.html')
 

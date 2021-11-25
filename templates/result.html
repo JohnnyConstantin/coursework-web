@@ -1,4 +1,12 @@
 {% extends "index.html" %}
 {% block body %}
-   //your code here
+{% for data in datas %}
+   <div class="item">
+      <div style="padding: 2em 0 0 2em"><img src="{{ data[2] }}"></div>
+      <div class="description">
+         <p>{{ data[0] }}</p>
+         <p>Цена: {{ data[1] }}</p>
+      </div>
+   </div>
+{% endfor %}
 {% endblock %}

@@ -100,3 +100,21 @@ i{
 input[type="checkbox"]{
     visibility: hidden;
 }
+
+.item{
+    margin-top: 1em;
+    border-radius: 10px;
+    border: 2px solid chocolate;
+    color: azure;
+    display: flex;
+    flex-direction: row;
+}
+
+.description{
+    margin-left: 2em;
+    padding: 0 10px 0 0;
+    font-size: 24px;
+    color: azure;
+    display: flex;
+    flex-direction: column;
+}
