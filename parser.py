@@ -5,9 +5,7 @@ from bs4 import BeautifulSoup
 app = Flask(__name__)
 
 
-def parse_mobicom(item):
-    # For data
-    d = []
+def parse_mobicom(item, d):
 
     # get pages
     for j in range(0, 500, 12):
@@ -36,7 +34,35 @@ def parse_mobicom(item):
                 price = price.replace("\n", "")
                 # добавляем данные о товаре в список
                 d.append([product, price, image, href])
-    return d
+
+def parse_kns(item, d):
+    # get pages
+    for j in range(30):
+        url = 'https://www.kns.ru/catalog/noutbuki/'
+        # указываем get параметр с помощью которого определяется номер страницы
+        par = url + f"/page{j}/"
+        # записываем ответ сервера в переменную r
+        session = requests.Session()
+        r = session.get(par)
+        # получаем объект  BeautifulSoup и записываем в переменную soup
+        soup = BeautifulSoup(r.text, 'html.parser')
+        # с помощью цикла перебираем товары на странице и получаем из них нужные параметры
+        for i in range(30):
+            # получаем название товара
+            product = soup.find_all(class_='name d-block')[i]['title']
+            if item in product:
+                # получаем цену товара
+                price = soup.find_all(class_='price my-1')[i].get_text()
+                #получаем картинку
+                image = soup.find_all('img')[i]['src']
+                #получаем ссылку
+                href = soup.find_all(class_='name d-block')[i]['href']
+                href = 'https://www.kns.ru' + href
+
+                # удаляем пробел из цены
+                price = price.replace("\n", "")
+                # добавляем данные о товаре в список
+                d.append([product, price, image, href])
 
 
 @app.route('/')
@@ -53,7 +79,11 @@ def get_laptops():
     print(item)
 
     if item != "":
-        d = parse_mobicom(item)
+        d = []
+        parse_kns(item, d)
+        parse_mobicom(item, d)
+        print(d)
+
         if len(d) == 0:
             return render_template('not_found.html')
         else:
