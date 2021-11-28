@@ -124,3 +124,8 @@ input[type="checkbox"]{
     justify-content: center;
     flex-direction: column;
 }
+
+.shop{
+    margin-right: 0;
+    margin-left: auto;
+}

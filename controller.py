@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-
 from Model import Model, find_max, find_min
 
 app = Flask(__name__)
@@ -25,7 +24,6 @@ def get_laptops():
 
         min = find_min.find_min(d)
         max = find_max.find_max(d)
-
 
         if len(d) == 0:
             return render_template('not_found.html')
