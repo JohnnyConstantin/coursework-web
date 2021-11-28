@@ -118,3 +118,9 @@ input[type="checkbox"]{
     display: flex;
     flex-direction: column;
 }
+
+.best{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

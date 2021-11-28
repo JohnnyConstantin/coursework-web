@@ -22,6 +22,8 @@ def parse_mobicom(item, d):
             # получаем название товара
             product = soup.find_all(class_='prod-en-lista-name')[i].get_text()
             if item in product:
+                #Получаем заголовок
+                naming = soup.find_all(class_='prod-en-lista-name')[i].a.get_text()
                 # получаем цену товара
                 price = soup.find_all(class_='buttonprice-list')[i].get_text()
                 #получаем картинку
@@ -33,7 +35,7 @@ def parse_mobicom(item, d):
                 # удаляем пробел из цены
                 price = price.replace("\n", "")
                 # добавляем данные о товаре в список
-                d.append([product, price, image, href])
+                d.append([naming, price, image, href, "mobicom"])
 
 def parse_kns(item, d):
     # get pages
@@ -62,8 +64,24 @@ def parse_kns(item, d):
                 # удаляем пробел из цены
                 price = price.replace("\n", "")
                 # добавляем данные о товаре в список
-                d.append([product, price, image, href])
+                d.append([product, price, image, href, "kns"])
 
+
+def find_min_index(d):
+    prices = []
+    for dd in d:
+        prices.append(dd[1])
+
+    mi = min(prices)
+    return prices.index(mi)
+
+def find_max_index(d):
+    prices = []
+    for dd in d:
+        prices.append(dd[1])
+
+    ma = max(prices)
+    return prices.index(ma)
 
 @app.route('/')
 def start():
@@ -72,9 +90,8 @@ def start():
 
 @app.route('/get_laptops', methods=['POST'])
 def get_laptops():
-    # here will be parsing
+    # here is parsing
 
-    checked = request.form.get('laptop')
     item = request.form.get('item_to_search')
     print(item)
 
@@ -82,13 +99,10 @@ def get_laptops():
         d = []
         parse_kns(item, d)
         parse_mobicom(item, d)
-        print(d)
 
         if len(d) == 0:
             return render_template('not_found.html')
         else:
-            return render_template('result.html', datas=d)
+            return render_template('result.html', datas=d, min=d[find_min_index(d)], max=d[find_max_index(d)])
     else:
         return render_template('no_args.html')
-
-    return render_template('index.html')
